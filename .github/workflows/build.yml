@@ -1,0 +1,41 @@
+name: Build Windows executable
+
+on:
+  push:
+    branches:
+      - main
+      - master
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    name: Build LanDrop
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Check .NET Framework compiler
+        shell: powershell
+        run: |
+          $csc = "$env:WINDIR\Microsoft.NET\Framework64\v4.0.30319\csc.exe"
+          if (-not (Test-Path $csc)) { throw "csc.exe not found: $csc" }
+          Write-Host "Using $csc"
+
+      - name: Build and package
+        shell: powershell
+        run: |
+          powershell -NoProfile -ExecutionPolicy Bypass -File .\build.ps1
+
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: LanDrop-windows
+          path: release/LanDrop-1.0-Windows.zip
+          if-no-files-found: error
+          retention-days: 30

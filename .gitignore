@@ -1,0 +1,24 @@
+# 编译产物
+/dist/
+/release/
+/bin/
+/obj/
+*.exe
+*.pdb
+*.dll
+*.zip
+
+# 运行时数据
+/config.json
+/endpoint.txt
+*.log
+*.part
+*.tmp
+
+# IDE / 系统
+.vs/
+.vscode/
+*.user
+*.suo
+Thumbs.db
+.DS_Store

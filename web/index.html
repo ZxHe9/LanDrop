@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <title>LanDrop · 局域网快传</title>
+  <link rel="icon" href="/favicon.ico">
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <svg class="svg-sprite" aria-hidden="true" focusable="false">
+    <symbol id="i-logo" viewBox="0 0 48 48">
+      <path d="M10 30V16a6 6 0 0 1 6-6h16a6 6 0 0 1 6 6v14a6 6 0 0 1-6 6H16a6 6 0 0 1-6-6Z" fill="none" stroke="currentColor" stroke-width="2.4"/>
+      <path d="M18 21h12M18 27h12" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/>
+      <path d="m25 17 5 4-5 4M23 23l-5 4 5 4" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+    </symbol>
+    <symbol id="i-folder" viewBox="0 0 24 24"><path d="M3.5 7.5A2.5 2.5 0 0 1 6 5h4l2 2h6a2.5 2.5 0 0 1 2.5 2.5v7A2.5 2.5 0 0 1 18 19H6a2.5 2.5 0 0 1-2.5-2.5Z" fill="currentColor" opacity=".9"/></symbol>
+    <symbol id="i-folder-open" viewBox="0 0 24 24"><path d="M3.5 8V7A2 2 0 0 1 5.5 5h4l2 2h6A2 2 0 0 1 19.5 9v1H8a2 2 0 0 0-2 1.6L4 20h-.5Z" fill="currentColor" opacity=".55"/><path d="M7.2 11h13.1a1.5 1.5 0 0 1 1.45 1.9l-2.1 6A2 2 0 0 1 17.7 20H6.2a1.5 1.5 0 0 1-1.45-1.9l2.1-6A2 2 0 0 1 7.2 11Z" fill="currentColor"/></symbol>
+    <symbol id="i-file" viewBox="0 0 24 24"><path d="M6 3.5h7l5 5v12H6Z" fill="currentColor" opacity=".22"/><path d="M13 3.5v5h5M9 13h6M9 16.5h6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/></symbol>
+    <symbol id="i-drive" viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="12" rx="3" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M6 15h.01M18 9h.01" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/><path d="M9 10h6v4H9z" fill="currentColor" opacity=".3"/></symbol>
+    <symbol id="i-arrow-right" viewBox="0 0 24 24"><path d="M4 12h15M14 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-arrow-left" viewBox="0 0 24 24"><path d="M20 12H5M10 6l-6 6 6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-refresh" viewBox="0 0 24 24"><path d="M20 11a8 8 0 1 0-2 6M20 4v7h-7" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-settings" viewBox="0 0 24 24"><path d="M12 8.5a3.5 3.5 0 1 0 0 7 3.5 3.5 0 0 0 0-7Z" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M19 13.2a7 7 0 0 0 0-1.4l2-1.6-2-3.4-2.4 1a7 7 0 0 0-1.2-.7L15.1 4h-4.2L10.5 7a7 7 0 0 0-1.2.7l-2.4-1-2 3.4 2 1.6a7 7 0 0 0 0 1.4l-2 1.6 2 3.4 2.4-1a7 7 0 0 0 1.2.7l.4 3h4.2l.4-3a7 7 0 0 0 1.2-.7l2.4 1 2-3.4Z" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></symbol>
+    <symbol id="i-copy" viewBox="0 0 24 24"><rect x="8.5" y="8.5" width="11" height="11" rx="2" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M15.5 8.5v-2a2 2 0 0 0-2-2h-7a2 2 0 0 0-2 2v7a2 2 0 0 0 2 2h2" fill="none" stroke="currentColor" stroke-width="1.7"/></symbol>
+    <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+    <symbol id="i-trash" viewBox="0 0 24 24"><path d="M4 7h16M9 7V5h6v2M7 7l1 13h8l1-13M10 11v5M14 11v5" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-pencil" viewBox="0 0 24 24"><path d="m14 5 5 5L9 20H4v-5Z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="m13 6 5 5" stroke="currentColor" stroke-width="1.7"/></symbol>
+    <symbol id="i-search" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="m15.5 15.5 4.5 4.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+    <symbol id="i-chevron-down" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-chevron-up" viewBox="0 0 24 24"><path d="m6 15 6-6 6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-x" viewBox="0 0 24 24"><path d="m6 6 12 12M18 6 6 18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12 4.5 4.5L19 7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-monitor" viewBox="0 0 24 24"><rect x="3" y="4.5" width="18" height="12" rx="2" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M8 20h8M12 16.5V20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></symbol>
+    <symbol id="i-laptop" viewBox="0 0 24 24"><rect x="5" y="5" width="14" height="10" rx="2" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M3 19h18" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/></symbol>
+    <symbol id="i-wifi" viewBox="0 0 24 24"><path d="M3.5 9.5a13 13 0 0 1 17 0M6.5 13a8.5 8.5 0 0 1 11 0M9.5 16.3a4 4 0 0 1 5 0" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><circle cx="12" cy="19.4" r="1.3" fill="currentColor"/></symbol>
+    <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3.5 19 6v6c0 4.5-3 7.4-7 8.5-4-1.1-7-4-7-8.5V6Z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="m9 12 2 2 4-4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M12 7v5.3l3.2 2" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></symbol>
+    <symbol id="i-alert" viewBox="0 0 24 24"><path d="M12 3.5 21 20H3Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M12 9v5M12 17.2h.01" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+    <symbol id="i-folder-plus" viewBox="0 0 24 24"><path d="M3.5 7.5A2.5 2.5 0 0 1 6 5h4l2 2h6a2.5 2.5 0 0 1 2.5 2.5v7A2.5 2.5 0 0 1 18 19H6a2.5 2.5 0 0 1-2.5-2.5Z" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M12 10v5M9.5 12.5h5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></symbol>
+    <symbol id="i-more" viewBox="0 0 24 24"><circle cx="5" cy="12" r="1.6" fill="currentColor"/><circle cx="12" cy="12" r="1.6" fill="currentColor"/><circle cx="19" cy="12" r="1.6" fill="currentColor"/></symbol>
+    <symbol id="i-external" viewBox="0 0 24 24"><path d="M14 4h6v6M20 4l-8 8M18 14v4a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-code" viewBox="0 0 24 24"><path d="m8 6-6 6 6 6M16 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-link" viewBox="0 0 24 24"><path d="M10 14a4.5 4.5 0 0 0 6.4 0l3-3a4.5 4.5 0 0 0-6.4-6.4l-1.7 1.7M14 10a4.5 4.5 0 0 0-6.4 0l-3 3a4.5 4.5 0 0 0 6.4 6.4l1.7-1.7" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+    <symbol id="i-download" viewBox="0 0 24 24"><path d="M12 3v11M8 10l4 4 4-4M5 19h14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-upload" viewBox="0 0 24 24"><path d="M12 16V5M8 9l4-4 4 4M5 19h14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-check-circle" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="m8 12 2.6 2.6L16.5 9" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  </svg>
+
+  <div class="app" id="app">
+    <header class="topbar">
+      <div class="brand">
+        <div class="brand-mark"><svg class="icon logo-icon"><use href="#i-logo"></use></svg></div>
+        <div class="brand-text">
+          <span class="brand-name">LanDrop</span>
+          <span class="brand-sub">局域网快传</span>
+        </div>
+      </div>
+      <div class="top-actions">
+        <div class="net-status" id="netStatus" title="局域网发现状态">
+          <span class="net-dot"></span><span id="netStatusText">正在检测</span>
+        </div>
+        <button class="code-chip" id="codeChip" title="复制连接码">
+          <span class="code-label">连接码</span>
+          <strong id="codeText">----</strong>
+          <svg class="icon tiny"><use href="#i-copy"></use></svg>
+        </button>
+        <button class="icon-btn" id="btnRefreshDevices" title="刷新设备">
+          <svg class="icon"><use href="#i-refresh"></use></svg>
+        </button>
+        <button class="icon-btn" id="btnSettings" title="设置">
+          <svg class="icon"><use href="#i-settings"></use></svg>
+        </button>
+      </div>
+    </header>
+
+    <div class="subbar">
+      <div class="local-identity">
+        <span class="status-dot"></span>
+        <span id="deviceName">本机</span>
+        <span class="dot-sep">·</span>
+        <span id="localAddress">正在获取地址</span>
+      </div>
+      <div class="trust-tip"><svg class="icon tiny"><use href="#i-shield"></use></svg> 文件只在局域网内传输，不经过微信或互联网</div>
+    </div>
+
+    <main class="workspace">
+      <section class="pane" id="localPane">
+        <div class="pane-head">
+          <div class="pane-title">
+            <span class="pane-avatar local"><svg class="icon"><use href="#i-monitor"></use></svg></span>
+            <div>
+              <h2>本机</h2>
+              <p id="localTag">这台电脑</p>
+            </div>
+          </div>
+          <div class="pane-actions">
+            <button class="icon-btn small" id="btnLocalRefresh" title="刷新">
+              <svg class="icon"><use href="#i-refresh"></use></svg>
+            </button>
+          </div>
+        </div>
+
+        <div class="path-row">
+          <select class="drive-select" id="localDrive" title="切换磁盘"></select>
+          <nav class="breadcrumb" id="localCrumb"></nav>
+          <button class="icon-btn small" id="btnLocalGo" title="输入路径">
+            <svg class="icon"><use href="#i-code"></use></svg>
+          </button>
+        </div>
+
+        <div class="list-toolbar">
+          <label class="search">
+            <svg class="icon tiny"><use href="#i-search"></use></svg>
+            <input id="localSearch" type="search" placeholder="筛选当前文件夹" autocomplete="off">
+          </label>
+          <label class="check"><input type="checkbox" id="localHidden"> 显示隐藏</label>
+        </div>
+
+        <div class="file-head">
+          <span class="col-check"><input type="checkbox" id="localAll" title="全选"></span>
+          <span class="col-name">名称</span>
+          <span class="col-size">大小</span>
+          <span class="col-date">修改时间</span>
+        </div>
+        <div class="file-list" id="localList" tabindex="0"></div>
+
+        <div class="pane-foot">
+          <span class="selection" id="localSel">未选择项目</span>
+          <div class="foot-actions">
+            <button class="btn ghost" id="btnLocalMkdir"><svg class="icon tiny"><use href="#i-folder-plus"></use></svg> 新建</button>
+            <button class="btn ghost" id="btnLocalRename" title="重命名（选择一个项目）" disabled><svg class="icon tiny"><use href="#i-pencil"></use></svg></button>
+            <button class="btn danger-ghost" id="btnLocalDelete" title="删除选中的项目" disabled><svg class="icon tiny"><use href="#i-trash"></use></svg></button>
+            <button class="btn primary" id="btnPush" disabled>传到对面 <svg class="icon tiny"><use href="#i-arrow-right"></use></svg></button>
+          </div>
+        </div>
+      </section>
+
+      <div class="pane-divider" aria-hidden="true">
+        <div class="divider-line"></div>
+        <div class="divider-badge"><svg class="icon"><use href="#i-arrow-right"></use></svg></div>
+      </div>
+
+      <section class="pane" id="remotePane">
+        <div class="pane-head">
+          <div class="pane-title">
+            <span class="pane-avatar remote"><svg class="icon"><use href="#i-laptop"></use></svg></span>
+            <div>
+              <h2>对方电脑</h2>
+              <p id="remoteTag">未连接</p>
+            </div>
+          </div>
+          <div class="pane-actions">
+            <select class="peer-select" id="peerSelect" title="选择设备">
+              <option value="">选择设备</option>
+            </select>
+            <button class="btn ghost small-btn" id="btnAddPeer"><svg class="icon tiny"><use href="#i-plus"></use></svg> 添加设备</button>
+          </div>
+        </div>
+
+        <div class="remote-empty" id="remoteEmpty">
+          <div class="empty-art">
+            <div class="empty-screen"><svg class="icon"><use href="#i-laptop"></use></svg></div>
+            <div class="empty-link"><svg class="icon"><use href="#i-wifi"></use></svg></div>
+            <div class="empty-screen second"><svg class="icon"><use href="#i-monitor"></use></svg></div>
+          </div>
+          <h3>连接另一台电脑</h3>
+          <p>确保两台电脑在同一个 Wi-Fi，并且都打开了 LanDrop。<br>然后输入对方窗口右上角显示的连接码。</p>
+          <button class="btn primary" id="btnAddPeer2"><svg class="icon tiny"><use href="#i-plus"></use></svg> 添加设备</button>
+          <div class="empty-hint"><svg class="icon tiny"><use href="#i-wifi"></use></svg> 同一 Wi-Fi 下会自动发现设备</div>
+        </div>
+
+        <div class="remote-body" id="remoteBody" hidden>
+          <div class="inline-alert" id="remoteAlert" hidden></div>
+          <div class="path-row">
+            <select class="drive-select" id="remoteDrive" title="切换磁盘"></select>
+            <nav class="breadcrumb" id="remoteCrumb"></nav>
+            <button class="icon-btn small" id="btnRemoteGo" title="输入路径">
+              <svg class="icon"><use href="#i-code"></use></svg>
+            </button>
+          </div>
+          <div class="list-toolbar">
+            <label class="search">
+              <svg class="icon tiny"><use href="#i-search"></use></svg>
+              <input id="remoteSearch" type="search" placeholder="筛选当前文件夹" autocomplete="off">
+            </label>
+            <label class="check"><input type="checkbox" id="remoteHidden"> 显示隐藏</label>
+          </div>
+          <div class="file-head">
+            <span class="col-check"><input type="checkbox" id="remoteAll" title="全选"></span>
+            <span class="col-name">名称</span>
+            <span class="col-size">大小</span>
+            <span class="col-date">修改时间</span>
+          </div>
+          <div class="file-list" id="remoteList" tabindex="0"></div>
+          <div class="pane-foot">
+            <span class="selection" id="remoteSel">未选择项目</span>
+            <div class="foot-actions">
+              <button class="btn ghost" id="btnRemoteMkdir"><svg class="icon tiny"><use href="#i-folder-plus"></use></svg> 新建</button>
+              <button class="btn ghost" id="btnRemoteRename" title="重命名（选择一个项目）" disabled><svg class="icon tiny"><use href="#i-pencil"></use></svg></button>
+              <button class="btn danger-ghost" id="btnRemoteDelete" title="删除选中的项目" disabled><svg class="icon tiny"><use href="#i-trash"></use></svg></button>
+              <button class="btn primary" id="btnPull" disabled><svg class="icon tiny"><use href="#i-arrow-left"></use></svg> 下载到本机</button>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <section class="transfer-dock" id="transferDock">
+      <div class="dock-head" id="dockHead">
+        <div class="dock-title">
+          <span class="dock-icon"><svg class="icon"><use href="#i-upload"></use></svg></span>
+          <strong>传输队列</strong>
+          <span class="dock-summary" id="dockSummary">暂无任务</span>
+        </div>
+        <div class="dock-actions">
+          <button class="dock-clear" id="btnClearDone" hidden>清除已完成</button>
+          <button class="icon-btn tiny-btn" id="btnDockToggle" title="展开 / 收起">
+            <svg class="icon"><use href="#i-chevron-up"></use></svg>
+          </button>
+        </div>
+      </div>
+      <div class="dock-list" id="dockList"></div>
+    </section>
+  </div>
+
+  <div class="toast-wrap" id="toastWrap"></div>
+  <div class="modal-layer" id="modalLayer" hidden></div>
+
+  <script src="/app.js"></script>
+</body>
+</html>
