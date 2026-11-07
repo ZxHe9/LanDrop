@@ -220,7 +220,7 @@ powershell -ExecutionPolicy Bypass -File .\build.ps1 -NoPackage
 
 ### 上传到 GitHub
 
-源码包解压后就是一个完整的仓库目录，可直接用 GitHub 网页上传，或按 [GITHUB_UPLOAD.md](GITHUB_UPLOAD.md) 里的 Git 命令推送。
+源码包解压后就是一个完整的仓库目录，可直接用 GitHub 网页上传，或使用 Git 命令行推送。
 
 `dist/`、`release/`、`*.exe` 已被 `.gitignore` 排除，不需要把编译产物提交进仓库；GitHub Actions 会自动生成。
 

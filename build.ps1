@@ -59,7 +59,7 @@ if (-not $NoPackage) {
     if (Test-Path $packageDir) { Remove-Item $packageDir -Recurse -Force }
     New-Item -ItemType Directory -Force -Path $packageDir | Out-Null
     Copy-Item $output (Join-Path $packageDir "LanDrop.exe")
-    foreach ($doc in @("使用说明.txt", "README.md", "LICENSE", "CHANGELOG.md", "SECURITY.md", "GITHUB_UPLOAD.md")) {
+    foreach ($doc in @("使用说明.txt", "README.md", "LICENSE", "SECURITY.md")) {
         $docPath = Join-Path $root $doc
         if (Test-Path $docPath) { Copy-Item $docPath (Join-Path $packageDir $doc) }
     }
