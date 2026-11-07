@@ -237,9 +237,18 @@ powershell -ExecutionPolicy Bypass -File .\build.ps1 -NoPackage
 
 调试版本可用 `build.ps1 -DebugBuild` 编译为控制台程序。
 
-## 许可证
+## 开源协议
 
-MIT License，详见 [LICENSE](LICENSE)。
+本项目采用 **MIT License** 开源。
+
+你可以自由使用、复制、修改、合并、发布、分发、再许可和/或销售本软件的副本，包括商业用途；但需要保留原始版权声明和许可声明。软件按“原样”提供，不附带任何明示或暗示的担保。
+
+完整条款见 [LICENSE](LICENSE)。
+
+## 开发说明
+
+LanDrop v1.0 的代码编写、问题排查和文档整理过程中使用了 **DeepSeek** 辅助开发。  
+最终代码、功能验证和发布由项目维护者完成。
 
 ## 版本
 
